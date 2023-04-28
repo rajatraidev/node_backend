@@ -1,0 +1,26 @@
+<td>No Interview Allocated</td>
+                    <td>
+                       
+                        <form method="post" action="" name='myForm' id="<%= i %>">
+                        <select name="interviewId" id="">
+                            <% for(interview of interviewList){ %>
+                                
+                            <option value="<%= interview.id %>"><%= interview.companyName  %> [<%= interview.positions %>]</option>
+                            <% } %>
+                        </select>
+                        <input type="hidden" name="studentId" value="<%= student.id %>">
+                        <input type="submit" value="Allocate" id="submit" name="submit">
+                        </form>
+                        
+                    </td>
+
+                    <% let i = 1; %>
+                    <% i++ }%>
+
+
+                    <!-- Student Schema -->
+                    interview:
+                    {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'Interviews'
+                    }

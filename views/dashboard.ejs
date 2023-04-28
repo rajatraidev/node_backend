@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-light bg-dark">
+        <span class="navbar-brand mb-0 h1 text-light">Dashboard</span>
+        <div>
+            <a href="addStudent" class="btn btn-success">Add Student</a>
+            <a href="/interview/interview-list" class="btn btn-success">Add Interview</a>
+            <a href="logout"  class="btn btn-danger">Logout</a>
+            <button class="btn btn-light">Welcome <%= user.name %></button>
+        </div>
+    </nav>
+    <div class="col-md-12">
+        <table class="table table-bordered"> 
+            <thead>
+                <tr>
+                <th>Student Id</th>
+                <th>Student Name</th>
+                <th>Student College</th>
+                <th>Student Status</th>
+                <th>DSA Final Score</th>
+                <th>WebD Final Score</th>
+                <th>React Final Score</th>
+                <th>Interview Date</th>
+                <th>Interview Company</th>
+                <th>Interview Result</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% for(data of dashboardData){ %>
+                <tr>
+                <td><%= data.student.id %></td>
+                <td><%= data.student.name %></td>
+                <td><%= data.student.college %></td>
+                <td><%=  %> Placed</td>
+                <td><%= data.student.dsa %></td>
+                <td><%= data.student.webd %></td>
+                <td><%= data.student.react %></td>
+                <td><%=  %></td>
+                <td><%= data.interview.companyName  %></td>
+                <td><%= data.result %></td>
+                <% } %>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</body>
+</html>
