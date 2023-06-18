@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
+
 // Require Controller to use
 const user_controller = require('../controllers/userController');
 
@@ -11,7 +12,7 @@ router.get('/dashboard', passport.checkAuth, user_controller.dashboard);
 router.get('/logout', user_controller.logout);
 router.get('/addStudent', user_controller.addStudent)
 router.post('/createStudent', user_controller.addStudentData);
-
+router.get('/download', user_controller.download);
 
 router.post('/createInterview', user_controller.addInterviewData)
 

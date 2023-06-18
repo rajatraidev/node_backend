@@ -1,38 +1,24 @@
 // Including Libraries and Modules
 const express = require('express');
 const path = require('path');
-
-
 const app = express();
 const port = 8000;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-
-
-// Connecting DataBase
 const db = require('./config/mongoose');
-
-
-// Passport Middleware to Authenticate
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local');
-
-
-const connectFlash = require('connect-flash');
-
-
-
-// const MongoStore = require('connect-mongo')(session);
-
-// const MongoStore = require('connect-mongo')(session);
-
+const flash = require('connect-flash');
+const customMWare = require('./config/middleware');
+const MongoStore = require('connect-mongo');
+const expressLayouts = require('express-ejs-layouts');
 
 // Using UrlEncoded
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(cookieParser());
 
-
+app.use(expressLayouts);
 
 // Seting View Engine
 app.set('view engine', 'ejs');
@@ -68,14 +54,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuth);
 
-// app.use(flash());
+app.use(flash());
+app.use(customMWare.setFlash);
 
 // Use Router
 app.use('/', require('./routes'));
-
-
-
-
 
 // Setting Static File
 app.use(express.static('assets'));
@@ -86,6 +69,5 @@ app.listen(port, function(err){
     if(err){
         console.log(`Error in ${err}`);
     }
-
     console.log('Server is running visit http://localhost:8000 to see result');
 })

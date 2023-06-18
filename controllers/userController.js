@@ -2,13 +2,12 @@
 const Student = require('../models/student');
 const Interview = require('../models/interview');
 const Result = require('../models/result');
-
+// const downloadResource = require('./util');
+const par = require('json2csv');
 
 // Page for Dashboard
 module.exports.dashboard = function(req, res){
    Result.find({}).populate('student').populate('interview').exec(function(err, result){
-
-      // console.log(result);
       return res.render('dashboard',{
          title: 'Dashboard | Career Camp',
          dashboardData : result
@@ -43,6 +42,7 @@ module.exports.addStudentData = function(req, res){
       email: req.body.email,
       mobile: req.body.mobile,
       college: req.body.college,
+      batch: req.body.batch,
       dsa: req.body.dsa,
       webd: req.body.webd,
       react: req.body.react,
@@ -103,7 +103,38 @@ module.exports.logout = function(req, res){
         return console.log(err); 
       }
       res.clearCookie();
+      req.flash('success', 'Logged Out Successfully');
       res.redirect('/');
    });
  
 }
+
+
+module.exports.downloadResource = (res, fileName, fields, data) => {
+   const json2csv = new par.Parser({ fields });
+   const csv = json2csv.parse(data);
+   res.header('Content-Type', 'text/csv');
+   res.attachment(fileName);
+   return res.send(csv);
+}
+
+module.exports.download = async (req, res) => {
+   const fields = [
+      {
+         label: 'Student Id',
+         value: 'student.id'
+      },
+      {
+         label: 'Student Name',
+         value: 'student.name'
+      },
+      {
+         label: 'Student College',
+         value: 'student.college'
+      },
+     
+   ];
+   const data = await Result.find({}).populate('student').populate('interview').exec();
+
+   return this.downloadResource(res, 'users.csv', fields, data);
+  }

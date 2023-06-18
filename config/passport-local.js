@@ -8,7 +8,7 @@ const Employee = require('../models/signup');
 
 passport.use(new localStrategy({
     usernameField: 'email',
-}, function(email, password, done){
+    }, function(email, password, done){
     Employee.findOne({email: email}, function(err, employeeUser){
         if(err){
             console.log('Error')
@@ -45,7 +45,6 @@ passport.checkAuth = function(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
-
     return res.redirect('/');
     
 }
