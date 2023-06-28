@@ -6,6 +6,10 @@
     }
 </style>
 <div class="col-md-12">
+    <h6><u><%= title %></u></h6>
+    <% if(dashboardData.length > 0){ %>
+    <a href="/user/download" class="btn btn-info">Export Data</a>
+    <% } %>
     <table class="table table-bordered table-responsive data-table"> 
         <thead>
             <tr>
@@ -34,7 +38,7 @@
             <td><%= data.student.dsa %></td>
             <td><%= data.student.webd %></td>
             <td><%= data.student.react %></td>
-            <td><%=  %></td>
+            <td><%= data.interview.interviewDate %></td>
             <td><%= data.interview.companyName  %></td>
             <td><%= data.result %></td>
             <% } %>

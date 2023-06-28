@@ -40,7 +40,13 @@ const studentSchema = new mongoose.Schema({
     {
         type: Number,
         required: true,
-    }
+    },
+    interview:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'interview'
+        }
+    ]
 
 },
 {

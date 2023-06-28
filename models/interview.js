@@ -18,6 +18,10 @@ const interviewSchema  = new mongoose.Schema(
         type: String,
         required: true
     },
+    interviewDate :{
+        type: String,
+        required: true
+    },
     student:[
         {
             type: mongoose.Schema.Types.ObjectId,

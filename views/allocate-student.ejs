@@ -1,9 +1,33 @@
-<div>
-    <form action="" method="post">
-        <% for(student of studentList){ %>
-            <input type="checkbox" name="student" id="<%= student.id %>" value="<%= student.id %>">
-            <label for="<%= student.id %>"><%= student.name %></label><br>
-        <% } %>
-        <input type="submit" value="Allocate">
-    </form>
+<div class="col-md-12">
+    <h6><u><%= title %></u></h6>
+    <div class="col-md-12">
+        <form action="/interview/student-allocate" method="post">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="3" class="text-center"><%= interviewList.companyName %></th>
+                    </tr>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email Id</th>
+                    </tr>
+                </thead>
+                <input type="hidden" name="interviewId" value="<%= interviewList._id %>">
+            <% for(student of studentList){ %>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="student" id="<%= student.id %>" value="<%= student.id %>">
+                            
+                        </td>
+                        <td><%= student.name %></td>
+                        <td><%= student.email %></td>
+                    </tr>
+                </tbody>
+            <% } %>
+            </table>
+            <input type="submit" value="Allocate">
+        </form>
+    </div>
 </div>

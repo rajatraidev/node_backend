@@ -1,5 +1,3 @@
-
-
 {   
     // method to submit the form data for new post using AJAX
     let createStudent = function(){
@@ -7,14 +5,15 @@
 
         studentForm.submit(function(e){
             e.preventDefault();
-
             $.ajax({
                 type: 'post',
                 url: 'createStudent',
                 data: studentForm.serialize(),
                 success: function(data){
+                    document.getElementById('studentForm').reset();
                     let newPost = studentDetail(data.data.student);
                     $('#student-list').prepend(newPost);
+                    alert(data.message);
                 }, error: function(error){
                     console.log(error.responseText);
                 }
@@ -22,18 +21,18 @@
         });
     }
 
-
-   // method to create a post in DOM
-   let studentDetail = function(student){
-    return $(`<tr>
-    <td>${ student.name }</td>
-    <td>${ student.email }</td>
-    <td>${ student.mobile }</td>
-    <td>${ student.college }</td>
-    <td>${ student.dsa }</td>
-    <td>${ student.webd }</td>
-    <td>${ student.react }</td>
-    </tr>`)
+    // method to create a post in DOM
+    let studentDetail = function(student){
+        return $(`<tr>
+        <td>${ student.name }</td>
+        <td>${ student.email }</td>
+        <td>${ student.mobile }</td>
+        <td>${ student.college }</td>
+        <td>${ student.batch }</td>
+        <td>${ student.dsa }</td>
+        <td>${ student.webd }</td>
+        <td>${ student.react }</td>
+        </tr>`)
     }
 
     

@@ -1,89 +1,80 @@
-<style>
-    .form-field{
-        padding:10px;
-    }
-</style>
-<form action="createStudent" method="post" id="studentForm">
-    <div class="col-md-12 form-field">
-        <div class=" row">
-            <div class="col-md-4">
-                <label for="name">Full Name</label>
-                <input type="text" name="name" id="name" placeholder="Enter Your Name" class="form-control" required>
-            </div>
-            <div class="col-md-4">
-                <label for="emailId">Email Id</label>
-                <input type="email" name="email" id="emailId" placeholder="Enter Your Email Id" class="form-control" required>
-            </div>
-            <div class="col-md-4">
-                <label for="Mobile">Mobile</label>
-                <input type="text" name="mobile" id="Mobile" placeholder="Enter Mobile" class="form-control" required>
-            </div>
-            
-            <div class="col-md-4">
-                <label for="College">College</label>
-                <input type="text" name="college"  id="College" placeholder="Enter College" class="form-control" required>
-            </div>
-
-            <div class="col-md-4">
-                <label for="batch">Batch</label>
-                <input type="text" name="batch"  id="batch" placeholder="Enter Batch" class="form-control" required>
-            </div>
-        
-            <div class="col-md-4">
-                <label for="dfs">DSA Final Score</label>
-                <input type="text" name="dsa"  id="dfs" placeholder="Enter College" class="form-control" required>
-            </div>
-            
-            <div class="col-md-4">
-                <label for="wfs">WebD Final Score</label>
-                <input type="text" name="webd"  id="wfs" placeholder="Enter College" class="form-control" required>
-            </div>
-            
-            <div class="col-md-4">
-                <label for="rfs">React Final Score</label>
-                <input type="text" name="react"  id="rfs" placeholder="Enter College" class="form-control" required>
-            </div>  
-        </div>
-        <input type="submit" class="btn btn-info" value="Add Student">
-    </div>
-</form>
-
 <div class="col-md-12">
-    <table class="table table-bordered table-striped" id="data-table">
-        <tr>
-            <!-- <th>#</th> -->
-            <th>Name</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>College</th>
-            <th>Batch</th>
-            <th>DSA Final Score</th>
-            <th>WebD Final Score</th>
-            <th>React Final Score</th>
-        </tr>
-        
-        <!-- Iterating Student Data -->
-        <% let i=0;for(student of studentList ){ i++%>
+    <h6><u><%= title %></u></h6>
+    <form id="studentForm">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="name">Full Name</label>
+                    <input type="text" name="name" id="name" placeholder="Enter Your Name" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="emailId">Email Id</label>
+                    <input type="email" name="email" id="emailId" placeholder="Enter Your Email Id" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="Mobile">Mobile</label>
+                    <input type="text" name="mobile" id="Mobile" placeholder="Enter Mobile" class="form-control" required>
+                </div>
+                
+                <div class="col-md-3">
+                    <label for="College">College</label>
+                    <input type="text" name="college"  id="College" placeholder="Enter College" class="form-control" required>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="batch">Batch</label>
+                    <input type="text" name="batch"  id="batch" placeholder="Enter Batch" class="form-control" required>
+                </div>
             
-        <tbody id="student-list">
+                <div class="col-md-3">
+                    <label for="dfs">DSA Final Score</label>
+                    <input type="text" name="dsa"  id="dfs" placeholder="Enter DSA Score" class="form-control" required>
+                </div>
+                
+                <div class="col-md-3">
+                    <label for="wfs">WebD Final Score</label>
+                    <input type="text" name="webd"  id="wfs" placeholder="Enter WebD Score" class="form-control" required>
+                </div>
+                
+                <div class="col-md-3">
+                    <label for="rfs">React Final Score</label>
+                    <input type="text" name="react"  id="rfs" placeholder="Enter React Score" class="form-control" required>
+                </div>  
+            </div>
+            <input type="submit" class="btn btn-info" value="Add Student" style="margin-top: 5px;">
+        </div>
+    </form>
+
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped" id="data-table">
             <tr>
-                <!-- <td><%= i %></td> -->
-                <td><%= student.name %></td>
-                <td><%= student.email %></td>
-                <td><%= student.mobile %></td>
-                <td><%= student.college %></td>
-                <td><%= student.batch %></td>
-                <td><%= student.dsa %></td>
-                <td><%= student.webd %></td>
-                <td><%= student.react %></td>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>College</th>
+                <th>Batch</th>
+                <th>DSA Final Score</th>
+                <th>WebD Final Score</th>
+                <th>React Final Score</th>
             </tr>
-        </tbody> 
+            
+            <!-- Iterating Student Data -->
+            <% let i=0;for(student of studentList ){ i++%>   
+            <tbody id="student-list">
+                <tr>
+                    <td><%= student.name %></td>
+                    <td><%= student.email %></td>
+                    <td><%= student.mobile %></td>
+                    <td><%= student.college %></td>
+                    <td><%= student.batch %></td>
+                    <td><%= student.dsa %></td>
+                    <td><%= student.webd %></td>
+                    <td><%= student.react %></td>
+                </tr>
+            </tbody> 
 
-        <% } %>
-    </table>
+            <% } %>
+        </table>
+    </div>
 </div>
-
-<!-- Jquery Cdnjs -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" ></script> -->
-<!-- Custom Js -->
-<!-- <script src="/js/student-js.js" type="application/javascript"></script> -->
+<script src="/js/student-js.js" type="application/javascript"></script>

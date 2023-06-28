@@ -2,37 +2,42 @@
 const Student = require('../models/student');
 const Interview = require('../models/interview');
 const Result = require('../models/result');
-// const downloadResource = require('./util');
 const par = require('json2csv');
 
 // Page for Dashboard
 module.exports.dashboard = function(req, res){
-   Result.find({}).populate('student').populate('interview').exec(function(err, result){
-      return res.render('dashboard',{
-         title: 'Dashboard | Career Camp',
-         dashboardData : result
+   if(req.isAuthenticated()){
+      Result.find({}).populate('student').populate('interview').exec(function(err, result){
+         return res.render('dashboard',{
+            title: 'Dashboard',
+            dashboardData : result
+         });
       });
-   });
-   
+   }
+   else{
+      return res.redirect('/');
+   }  
 }
 
 // Page For Student List
 module.exports.addStudent = function(req, res){
-   Student.find({}, function(err, studentList){
-      if(err){
-         console.log('Issuing in fetching data');
-      }
-      
-      return res.render('add-student',{
-         title: 'Add Student | Career Camp',
-         studentList : studentList,
+   if(req.isAuthenticated()){
+      Student.find({}, function(err, studentList){
+         if(err){
+            req.flash('error', 'Error While Fetching Data');
+         }
+         
+         return res.render('add-student',{
+            title: 'Add Student',
+            studentList : studentList,
+         })
+
       })
-
-   })
-  
+   }
+   else{
+      res.redirect('/');
+   }
 }
-
-
 
 // Adding Student Data to Database
 module.exports.addStudentData = function(req, res){
@@ -52,7 +57,6 @@ module.exports.addStudentData = function(req, res){
           console.log('Error in creating a contact!', err)
           return;
       }
-
 
       if (req.xhr){
          return res.status(200).json({
@@ -109,7 +113,7 @@ module.exports.logout = function(req, res){
  
 }
 
-
+// Json to CSV
 module.exports.downloadResource = (res, fileName, fields, data) => {
    const json2csv = new par.Parser({ fields });
    const csv = json2csv.parse(data);
@@ -118,6 +122,7 @@ module.exports.downloadResource = (res, fileName, fields, data) => {
    return res.send(csv);
 }
 
+// Download CSV
 module.exports.download = async (req, res) => {
    const fields = [
       {

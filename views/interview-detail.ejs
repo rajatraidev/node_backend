@@ -1,38 +1,41 @@
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>College</th>
-            <th>DSA Final Score</th>
-            <th>WebD Final Score</th>
-            <th>React Final Score</th>
-            <th>Allocate Result</th>
-        </tr>
-    </thead>
-    <tbody>
-    <% let i = 1 %> 
-    <% for(student of studentList){ %>
-        
+<div class="col-md-12">
+    <h6><u><%= title %></u></h6>
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td><%= student.name %></td>
-                <td><%= student.college %></td>
-                <td><%= student.dsa %></td>
-                <td><%= student.webd %></td>
-                <td><%= student.react %></td>
-                <td>
-                    <form action="" method="post" name="resultForm" id="<%= i %>">
-                        <select name="result" id="">
-                            <option value="pass">Pass</option>
-                            <option value="fail">Fail</option>
-                            <option value="on hold">On Hold</option>
-                            <option value="not attempted">Didn't Attempted</option>
-                        </select>
-                        <input type="hidden" name="studentId" value="<%= student.id %>">
-                        <input type="hidden" name="interviewId" value="<%= data.id %>">
-                        <input type="submit" name="submit">
-                    </form>
-                </td>
+                <th>Name</th>
+                <th>College</th>
+                <th>DSA Final Score</th>
+                <th>WebD Final Score</th>
+                <th>React Final Score</th>
+                <th>Allocate Result</th>
             </tr>
-    <% i++ } %>
-</tbody>
-</table>
+        </thead>
+        <tbody>
+        <% let i = 1 %> 
+        <% for(student of studentList){ %>
+            
+                <tr>
+                    <td><%= student.name %></td>
+                    <td><%= student.college %></td>
+                    <td><%= student.dsa %></td>
+                    <td><%= student.webd %></td>
+                    <td><%= student.react %></td>
+                    <td>
+                        <form action="" method="post" name="resultForm" id="<%= i %>">
+                            <select name="result" id="">
+                                <option value="pass">Pass</option>
+                                <option value="fail">Fail</option>
+                                <option value="on hold">On Hold</option>
+                                <option value="not attempted">Didn't Attempted</option>
+                            </select>
+                            <input type="hidden" name="studentId" value="<%= student.id %>">
+                            <input type="hidden" name="interviewId" value="<%= data.id %>">
+                            <input type="submit" name="submit">
+                        </form>
+                    </td>
+                </tr>
+        <% i++ } %>
+        </tbody>
+    </table>
+</div>

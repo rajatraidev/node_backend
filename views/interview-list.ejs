@@ -1,20 +1,42 @@
-<form action="/interview/createInterview" method="post" id="interviewForm">
-    <label for="name">Company Name</label>
-    <input type="text" name="companyName" id="name" placeholder="Enter Company Name" required>
-    <label for="position">Position</label>
-    <input type="text" name="position" id="position" placeholder="Enter Position" required>
-    <label for="city">City</label>
-    <input type="text" name="city" id="city" placeholder="Enter City" required>
-    <label for="payScale">Pay Scale</label>
-    <input type="text" name="payScale"  id="payScale" placeholder="Enter Pay Scale" required>
-    <input type="submit" value="Add Interview">
-</form>
-
-<div class="container">
-    <div class="row">
-        <!-- Iterating Interview Data -->
+<style>
+    .interview-btn{
+        justify-content: space-around;
+    }
+</style>
+<div class="col-md-12">
+    <h6><u><%= title %></u></h6>
+    <form action="/interview/createInterview" method="post" id="interviewForm">
+        <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="name">Company Name</label>
+                <input type="text" name="companyName" id="name" placeholder="Enter Company Name"  class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label for="position">Position</label>
+                <input type="text" name="position" id="position" placeholder="Enter Position"  class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label for="city">City</label>
+                <input type="text" name="city" id="city" placeholder="Enter City"  class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label for="city">Interview Date</label>
+                <input type="date" name="interviewDate" id="city" placeholder="Interview Date"  class="form-control" required>
+            </div>
+            <div class="col-md-4">
+                <label for="payScale">Pay Scale</label>
+                <input type="text" name="payScale"  id="payScale" placeholder="Enter Pay Scale"  class="form-control" required>
+            </div>
+        </div>
+        </div>
+        <input type="submit" class="btn btn-info" value="Add Interview" style="margin-top: 5px;">
+    </form>
+    <!-- Iterating Interview Data -->
+    <div class="col-md-12">
+        <div class="row">
         <% for(interview of interviewList){ %>
-        <div class="col-sm-4 " id="interview-list">
+        <div class="col-md-4" id="interview-list">
             <div class="card text-white bg-info mb-3">
                 <div class="card-header text-center"><%= interview.companyName %></div>
                 <div class="card-body">
@@ -22,14 +44,15 @@
                     <p class="card-text">Skills Required : <%= interview.positions %></p>
                     <p class="card-text">City : <%= interview.city %></p>
                     <p class="card-text">Pay Scale : <%= interview.payScale %></p>
-                    <p class="card-text">Interview Date : </p>
-                    <div class="row">
-                    <a href="/interview/interviewDetail/?id=<%= interview.id %>" class="btn btn-primary col-sm-6">Show Student List</a>
-                    <a href="/interview/allocate-interview/?id=<%= interview.id %>" class="btn btn-primary col-sm-6">Allocate Student</a>
+                    <p class="card-text">Interview Date : <%= interview.interviewDate %></p>
+                    <div class="row interview-btn">
+                        <a href="/interview/interviewDetail/?id=<%= interview.id %>" class="btn btn-primary">Student List</a>
+                        <a href="/interview/allocate-interview/?id=<%= interview.id %>" class="btn btn-primary">Allocate Student</a>
                     </div>
                 </div>
             </div>
         </div>
         <% } %>
+        </div>
     </div>
 </div>
