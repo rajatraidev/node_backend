@@ -13,29 +13,33 @@
         </thead>
         <tbody>
         <% let i = 1 %> 
-        <% for(student of studentList){ %>
-            
-                <tr>
-                    <td><%= student.name %></td>
-                    <td><%= student.college %></td>
-                    <td><%= student.dsa %></td>
-                    <td><%= student.webd %></td>
-                    <td><%= student.react %></td>
-                    <td>
-                        <form action="" method="post" name="resultForm" id="<%= i %>">
-                            <select name="result" id="">
-                                <option value="pass">Pass</option>
-                                <option value="fail">Fail</option>
-                                <option value="on hold">On Hold</option>
-                                <option value="not attempted">Didn't Attempted</option>
-                            </select>
-                            <input type="hidden" name="studentId" value="<%= student.id %>">
-                            <input type="hidden" name="interviewId" value="<%= data.id %>">
-                            <input type="submit" name="submit">
-                        </form>
-                    </td>
-                </tr>
-        <% i++ } %>
+        <% if(data.student.length > 0){for(student of data.student){ %>
+            <tr>
+                <td><%= student.name %></td>
+                <td><%= student.college %></td>
+                <td><%= student.dsa %></td>
+                <td><%= student.webd %></td>
+                <td><%= student.react %></td>
+                <td>
+                    <form name="resultForm" id="<%= i %>">
+                        <select name="result" id="">
+                            <option value="pass">Pass</option>
+                            <option value="fail">Fail</option>
+                            <option value="on hold">On Hold</option>
+                            <option value="not attempted">Didn't Attempted</option>
+                        </select>
+                        <input type="hidden" name="studentId" value="<%= student.id %>">
+                        <input type="hidden" name="interviewId" value="<%= data.id %>">
+                        <input type="submit" name="submit">
+                    </form>
+                </td>
+            </tr>
+        <% i++ }}else{ %>
+            <tr>
+                <td colspan="6" class="text-center">No Student Allocated To This Interview.</td>
+            </tr>
+       <% } %>
         </tbody>
     </table>
 </div>
+<script src="/js/interview-js.js" type="application/javascript"></script>

@@ -31,14 +31,11 @@
         </tr>`)
     }
 
-
-    
     // Allocating Result to each student
     let allocateResult = function(){
 
         $('form[name="resultForm"]').on('submit', function(e) {
             e.preventDefault(e);
-
             let resultFormId = $(this).attr('id');
             let result  =  $("#"+resultFormId);
             $.ajax({
@@ -46,18 +43,14 @@
                 url: '/interview/allocateResult',
                 data: result.serialize(),
                 success: function(data){
-                   console.log('Result Allocated');
+                   alert('Result Allocated');
                 }, error: function(error){
                     console.log(error.responseText);
                 }
             });
         });
-
     }
 
-
     allocateResult();
-
-
     createInterview();
 }

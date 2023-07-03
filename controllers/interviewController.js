@@ -4,7 +4,7 @@ const Interview = require('../models/interview');
 const Student = require('../models/student');
 const student = require('../models/student');
 
-
+// Interview Function Starts //
 
 // Page for Interview List
 module.exports.interview = function(req, res){
@@ -24,7 +24,7 @@ module.exports.interview = function(req, res){
     }
 }
 
-// Adding Interview Data to Database
+// Add Interview Data to Database
 module.exports.addInterviewData = function(req, res){
     let createInterview = Interview.create({
         companyName: req.body.companyName,
@@ -52,7 +52,6 @@ module.exports.addInterviewData = function(req, res){
         return res.redirect('back');
     })
 }
- 
 
 // Allocating Student View Page
 module.exports.allocateInterview = function(req, res){
@@ -79,8 +78,8 @@ module.exports.allocateInterview = function(req, res){
 // Allocate Student
 module.exports.allocateStudent = function(req, res){
     if(req.body){
-        Interview.findByIdAnd(req.body.interviewId, 
-            {student:req.body.student}, function(err, allocated){
+        Interview.findByIdAndUpdate(req.body.interviewId, 
+            { $push: {student:req.body.student}}, function(err, allocated){
             if(err){
                 console.log(err);
             }
@@ -91,26 +90,18 @@ module.exports.allocateStudent = function(req, res){
 
 // Interview Details with Allocated Student
 module.exports.interviewDetail = function(req, res){
-    Interview.findById(req.query.id, function(err, details){
+    Interview.findById(req.query.id).populate('student').exec(function(err, details){
         if(err){
             console.log('Having issue in finding Details');
             return;
         }
-        Student.find({}, function(err, student){
-            if(err){
-                console.log('Cant Find Student', err);
-            }
-            return res.render('interview-detail', {
-                title: 'Interview Details',
-                data : details,
-                studentList : student
-            })
+        return res.render('interview-detail', {
+            title: 'Interview Details',
+            data : details,
         })
         
     })
-    
 }
-
 
 // Allocating Result to Allocated Student
 module.exports.allocateResult = function(req, res){
@@ -126,3 +117,5 @@ module.exports.allocateResult = function(req, res){
         return res.redirect('back');
     })
 }
+
+// Interview Controller Function Ends //

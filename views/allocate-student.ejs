@@ -14,18 +14,20 @@
                     </tr>
                 </thead>
                 <input type="hidden" name="interviewId" value="<%= interviewList._id %>">
-            <% for(student of studentList){ %>
                 <tbody>
+                    <% 
+                    for(student of studentList){  
+                        if(!interviewList.student.includes(student.id)){                               
+                    %>
                     <tr>
                         <td>
                             <input type="checkbox" name="student" id="<%= student.id %>" value="<%= student.id %>">
-                            
                         </td>
                         <td><%= student.name %></td>
                         <td><%= student.email %></td>
                     </tr>
+                    <% }} %>
                 </tbody>
-            <% } %>
             </table>
             <input type="submit" value="Allocate">
         </form>
