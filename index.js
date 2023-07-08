@@ -37,18 +37,7 @@ app.use(session({
     cookie:{
         maxAge: (1000 * 60 * 100)
     },
-    // store: new MongoStore(
-    //     {
-    //         mongoUrl : db,
-    //         autoRemove: 'disabled'
-        
-    //     },
-    //     function(err){
-    //         console.log(err ||  'connect-mongodb setup ok');
-    //     }
-    // )
 }))
-
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -69,5 +58,4 @@ app.listen(port, function(err){
     if(err){
         console.log(`Error in ${err}`);
     }
-    console.log('Server is running visit http://localhost:8000 to see result');
 })

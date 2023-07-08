@@ -142,4 +142,4 @@ module.exports.download = async (req, res) => {
    const data = await Result.find({}).populate('student').populate('interview').exec();
 
    return this.downloadResource(res, 'users.csv', fields, data);
-  }
+}
