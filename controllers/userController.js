@@ -137,6 +137,35 @@ module.exports.download = async (req, res) => {
          label: 'Student College',
          value: 'student.college'
       },
+      {
+         label : 'DSA Score',
+         value: 'student.dsa'
+      },
+      {
+         label : 'Webd Score',
+         value: 'student.webd'
+      },
+      {
+         label : 'React Score',
+         value: 'student.react'
+      },
+      {
+         label : 'React Score',
+         value: 'student.react'
+      },
+      {
+         label : 'Interview Date',
+         value: 'interview.interviewDate'
+      },
+      {
+         label : 'Interview Company',
+         value: 'interview.companyName'
+      },
+      {
+         label : 'Interview Result',
+         value: 'result'
+      },
+
      
    ];
    const data = await Result.find({}).populate('student').populate('interview').exec();
